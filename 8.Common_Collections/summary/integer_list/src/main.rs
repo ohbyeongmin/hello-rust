@@ -39,8 +39,12 @@ fn main() {
         *count += 1;
     }
 
+    let (mode_num, count) = hashm.iter().max_by_key(|entry| entry.1).unwrap();
+
     for (key, value) in &hashm {
         println!("{key}: {value}");
     }
-    println!("{medium_index}")
+
+    println!("{medium_index}");
+    println!("{mode_num}, {count}");
 }
