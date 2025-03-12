@@ -1,5 +1,61 @@
 # Variables and Mutability
 
+By default, variables are immutable.
+
+It allow you to write your code in a way that takes advantage of Rust's safety and easy concurrency.
+
+You can make them mutable by adding `mut` in front of the variable name.
+
+## Constants
+
+Constants are always immutable.
+
+You declare contants using the `const` keyword instead of the `let` keyword, and the type of the value must be annotated.
+
+Constants can be declared in any scope, including the global scope, which makes them useful for values that many parts of code need to know about.
+
+The last difference is that constants may be set only to a constant expression, not the result of a value that could only be computed at runtime.
+
+```rust
+const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
+```
+
+Rust’s naming convention for constants is to use all uppercase with underscores between words.
+
+## Shadowing
+
+You can declare a new variable with the same name as a previous variable. Rustaceans say that the first variable is shadowed by the second, which means that the second variable is what the compiler will see when you use the name of the variable.
+
+```rust
+fn main() {
+    let x = 5;
+
+    let x = x + 1;
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
+```
+
+```bash
+$ cargo run
+   Compiling variables v0.1.0 (file:///projects/variables)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running `target/debug/variables`
+The value of x in the inner scope is: 12
+The value of x is: 6
+```
+
+Shadowing is different from marking a variable as mut because we’ll get a compile-time error if we accidentally try to reassign to this variable without using the let keyword.
+
+The other difference between mut and shadowing is that because we’re effectively creating a new variable when we use the let keyword again, we can change the type of the value but reuse the same name.
+
+# Variables and Mutability
+
 Rust에서 변수는 기본적으로 불변(immutable) 이다. 하지만 가변(mutable) 으로 만들 수 있다.
 
 `mut` 을 붙여서 가변으로 만들 수 있다.
